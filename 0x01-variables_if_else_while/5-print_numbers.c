@@ -8,15 +8,12 @@
  */
 int main(void)
 {
-char c;
-for (c = '0'; c <= '9'; c++)
+int 1;
+for (1 = '0'; 1 < 1o; 1++)
 {
-putchar(c);
+printf("%1", 1)
 }
-for (c = 'a'; c <= 'f'; c++)
-{
-putchar(c);
-}
-putchar('\n');
+printf("\n");
 return (0);
 }
+
