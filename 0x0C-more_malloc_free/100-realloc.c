@@ -1,52 +1,40 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * _realloc - reallocates a memory block using malloc and free
+ * _realloc - reallocates a memory block using malloc and free.
+ * @ptr: pointer to previously allocated memory
+ * @old_size: size of allocated space for ptr
+ * @new_size: size of newly allocated space
  *
- * @ptr: a pointer to the memory previously allocated
- * @old_size: the old size
- * @new_size: the new size
- * Return: a pointer to the space in memory
+ * Return: pointer to newly allocated memory, or NULL if failure
  */
-
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char *arr;
-	char *new_ptr = ptr;
-	unsigned int i = 0;
+	char *p;
+	unsigned int i, max = new_size;
+	char *oldp = ptr;
 
-	if (new_size == old_size)
-		return (new_ptr);
-	if (new_size == 0 && new_ptr != NULL)
+	if (ptr == NULL)
 	{
-		free(new_ptr);
+		p = malloc(new_size);
+		return (p);
+	}
+	else if (new_size == 0)
+	{
+		free(ptr);
 		return (NULL);
 	}
-	else if (new_ptr == NULL)
-	{
-		free(new_ptr);
-		arr = malloc(new_size);
-		if (arr == NULL)
-			return (NULL);
-		return (arr);
-	}
-	arr = malloc(new_size);
-	if (arr == NULL)
+	else if (new_size == old_size)
+		return (ptr);
+
+	p = malloc(new_size);
+	if (p == NULL)
 		return (NULL);
-	/ initialize new array /
 	if (new_size > old_size)
-	{
-		for (; i < old_size; i++)
-			arr[i] = new_ptr[i];
-	}
-	else
-	{
-		for (; i < new_size; i++)
-			arr[i] = new_ptr[i];
-	}
-	free(new_ptr);
-	return (arr);
+		max = old_size;
+	for (i = 0; i < max; i++)
+		p[i] = oldp[i];
+	free(ptr);
+	return (p);
 }
-
